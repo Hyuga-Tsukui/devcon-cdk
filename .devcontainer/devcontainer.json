@@ -3,6 +3,8 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
     "features": {
         "ghcr.io/devcontainers/features/python:1": {
             "version": "3.12"
@@ -15,7 +17,11 @@
         },
         "ghcr.io/devcontainers-contrib/features/aws-cdk:2": {
             "version": "2.173.1"
-        }
+        },
+        "ghcr.io/devcontainers-contrib/features/poetry:2": {
+            "version": "1.8.5"
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
     "mounts": [
         {

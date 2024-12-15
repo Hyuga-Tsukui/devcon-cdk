@@ -1,16 +1,17 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { aws_lambda } from 'aws-cdk-lib';
+import { PythonFunction } from '@aws-cdk/aws-lambda-python-alpha';
 
 export class AwsStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'AwsQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    new PythonFunction(this, 'helloFunction', {
+      functionName: 'helloFunction',
+      runtime: aws_lambda.Runtime.PYTHON_3_12,
+      entry: 'lambda/hello',
+      handler: 'lambda_handler',
+    });
   }
 }
