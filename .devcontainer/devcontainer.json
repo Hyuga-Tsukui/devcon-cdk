@@ -1,0 +1,39 @@
+{
+    "name": "aws-cdk",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12"
+        },
+        "ghcr.io/devcontainers/features/aws-cli:1":  {
+            "version": "2.22.17"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "22"
+        },
+        "ghcr.io/devcontainers-contrib/features/aws-cdk:2": {
+            "version": "2.173.1"
+        }
+    },
+    "mounts": [
+        {
+            "source": "${localEnv:HOME}/.aws",
+            "target": "/home/vscode/.aws",  
+            "type": "bind"
+        },
+        {
+            "source": "aws-cdk-bash-history",
+            "target": "/commandhistory",
+            "type": "volume"
+        },
+        {
+            "source": "${localWorkspaceFolderBasename}-cdk",
+            "target": "${containerWorkspaceFolder}/aws/node_modules",
+            "type": "volume"
+        }
+    ],
+    // REF:https://code.visualstudio.com/remote/advancedcontainers/improve-performance
+    "postCreateCommand": "sudo chown vscode ${containerWorkspaceFolder}/aws/node_modules"
+}
